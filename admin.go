@@ -47,3 +47,7 @@ func (a *Admin) CreateTopic(topic string) {
 	}
 	fmt.Printf("Created topic '%s'\n", topic)
 }
+
+func (a *Admin) Close() {
+	a.client.Close()
+}
