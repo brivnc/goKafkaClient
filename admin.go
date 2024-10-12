@@ -12,7 +12,7 @@ type Admin struct {
 	client *kadm.Client
 }
 
-func newAdmin(brokers []string) *Admin {
+func NewAdmin(brokers []string) *Admin {
 	client, err := kgo.NewClient(kgo.SeedBrokers(brokers...))
 	if err != nil {
 		log.Panicf("Unable to create new Client, %v", err)
@@ -21,7 +21,7 @@ func newAdmin(brokers []string) *Admin {
 	return &Admin{client: admin}
 }
 
-func (a *Admin) topicExists(topic string) bool {
+func (a *Admin) TopicExists(topic string) bool {
 	ctx := context.Background()
 	topics, err := a.client.ListTopics(ctx, topic)
 	if err != nil {
@@ -36,7 +36,7 @@ func (a *Admin) topicExists(topic string) bool {
 	return false
 }
 
-func (a *Admin) createTopic(topic string) {
+func (a *Admin) CreateTopic(topic string) {
 	ctx := context.Background()
 	resp, err := a.client.CreateTopic(ctx, 1, 1, nil, topic)
 	if err != nil {
